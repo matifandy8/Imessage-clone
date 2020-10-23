@@ -1,16 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import "./App.css";
-import Imessage from "/Imessage";
+import { selectUser } from "./features/userSlice";
+import Imessage from "./Imessage";
+import Login from "./Login";
 
 function App() {
-  // Bem
-  return (
-    <div className="app">
-      <h1>lets buil imessage</h1>
+  const user = useSelector(selectUser);
 
-      <Imessage />
-    </div>
-  );
+  return <div className="app">{user ? <Imessage /> : <Login />}</div>;
 }
 
 export default App;
