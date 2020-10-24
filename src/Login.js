@@ -4,7 +4,9 @@ import { auth, provider } from "./firebase";
 import "./Login.css";
 
 function Login() {
-  const singIn = () => {};
+  const singIn = () => {
+    auth.signInWithPopup(provider).catch((error) => alert(error.message));
+  };
   return (
     <div className="login">
       <div className="login__logo">
@@ -15,7 +17,7 @@ function Login() {
         <h1>iMessage</h1>
       </div>
 
-      <Button>Sign In</Button>
+      <Button onClick={signIn}>Sign In</Button>
     </div>
   );
 }
