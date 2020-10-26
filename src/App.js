@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Login from "./Login.js";
 import "./App.css";
 import { selectUser, login, logout } from "./features/userSlice";
-import { auth } from "./firebase";
 import Imessage from "./Imessage";
-import Login from "./Login";
+import { auth } from "./firebase.js";
 
 function App() {
   const user = useSelector(selectUser);
@@ -13,23 +13,33 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        // user is logged in
         dispatch(
           login({
-            uid: auth.uid,
+            uid: authUser.uid,
             photo: authUser.photoURL,
             email: authUser.email,
             displayName: authUser.displayName,
           })
         );
+        //  user is logged in
       } else {
-        // user is logged out
+        //  user is logged out
         dispatch(logout());
       }
     });
-  });
+  }, [dispatch]);
 
-  return <div className="app">{user ? <Imessage /> : <Login />}</div>;
+  return (
+    <div className="app">
+      {user ? (
+        <>
+          <Imessage />
+        </>
+      ) : (
+        <Login />
+      )}
+    </div>
+  );
 }
 
 export default App;

@@ -1,15 +1,15 @@
 import React from "react";
-import Chat from "./Chat";
 import "./Imessage.css";
 import Sidebar from "./Sidebar";
+import Chat from "./Chat";
 
-function Imessage() {
+const Imessage = () => {
   return (
-    <div className="imessage">
+    <div className="iMessage">
       <Sidebar />
       <Chat />
     </div>
   );
-}
+};
 
 export default Imessage;
